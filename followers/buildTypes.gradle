@@ -1,0 +1,14 @@
+android
+buildTypes {
+    debug {
+    }
+    release {
+        postprocessing {
+            removeUnusedCode false
+            removeUnusedResources false
+            obfuscate false
+            optimizeCode false
+            proguardFile 'proguard-rules.pro'
+        }
+    }
+}

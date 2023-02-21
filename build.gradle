@@ -1,6 +1,100 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-plugins {
-    id 'com.android.application' version '7.4.1' apply false
-    id 'com.android.library' version '7.4.1' apply false
-    id 'org.jetbrains.kotlin.android' version '1.8.0' apply false
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.0.4'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31'
+        classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:4.17.2'
+    }
+}
+
+
+allprojects {
+    apply plugin: 'com.jfrog.artifactory'
+    apply plugin: 'maven-publish'
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+
+// Setting this property to true will make the artifactoryPublish task
+// skip this module (in our case, the root module):
+artifactoryPublish.skip = true
+
+def libraryGroupId = ConfigData.groupName
+def libraryArtifactId = ConfigData.artifactId
+def libraryVersion = generateVersion(ConfigData.versionName)
+
+static boolean isReleaseBranch() {
+    def branchName = "$System.env.BRANCH_NAME"
+    def isReleaseBranch = "master" == branchName
+    return isReleaseBranch
+}
+
+static String generateVersion(String versionName) {
+    def branchName = "$System.env.BRANCH_NAME"
+    def isDevelopBranch = "develop" == branchName
+    if (isReleaseBranch()) {
+        println("logger: branch $versionName")
+        return versionName
+    }
+    if (isDevelopBranch) {
+        println("logger: branch $versionName-SNAPSHOT")
+        return "$versionName-SNAPSHOT"
+    }
+    println("logger: branch $versionName-$branchName-SNAPSHOT")
+    return "$versionName-$branchName-SNAPSHOT"
+}
+
+project('followers') {
+    artifactoryPublish.dependsOn('build')
+    publishing {
+        publications {
+            aar(MavenPublication) {
+                groupId = libraryGroupId
+                artifactId = libraryArtifactId
+                version = libraryVersion
+                // Tell maven to prepare the generated "*.aar" file for publishing
+                artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
+            }
+        }
+    }
+
+    artifactoryPublish {
+        publications(publishing.publications.aar)
+    }
+}
+
+artifactory {
+    clientConfig.setIncludeEnvVars(true)
+    clientConfig.info.addEnvironmentProperty('test.adding.dynVar',new Date().toString())
+
+    contextUrl = artifactory_context_url
+    publish {
+        repository {
+            repoKey = 'libs-snapshot-local' // The Artifactory repository key to publish to
+            username = "${artifactory_user}" // The publisher user name
+            password = "${artifactory_password}" // The publisher password
+            // This is an optional section for configuring Ivy publication (when publishIvy = true).
+            ivy {
+                ivyLayout = '[organization]/[module]/ivy-[revision].xml'
+                artifactLayout = '[organization]/[module]/[revision]/[module]-[revision](-[classifier]).[ext]'
+                mavenCompatible = true //Convert any dots in an [organization] layout value to path separators, similar to Maven's groupId-to-path conversion. True if not specified
+            }
+        }
+        defaults {
+            // Reference to Gradle publications defined in the build script.
+            // This is how we tell the Artifactory Plugin which artifacts should be
+            // published to Artifactory.
+            publishArtifacts = true
+            // Properties to be attached to the published artifacts.
+            properties = ['qa.level': 'basic', 'dev.team' : 'core']
+            publishPom = true // Publish generated POM files to Artifactory (true by default)
+        }
+    }
 }
