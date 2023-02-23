@@ -5,6 +5,7 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
+    id("androidx.navigation.safeargs.kotlin")
 }
 apply(from = "buildTypes.gradle")
 
@@ -43,10 +44,10 @@ android {
         resources.excludes.add("META-INF/*.kotlin_module")
     }
 
-    dataBinding {
-        this.isEnabled = true
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
     }
-
 }
 
 dependencies {
@@ -56,6 +57,8 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.4.1")
     implementation("com.google.android.material:material:1.5.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.3")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
+    implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
@@ -79,6 +82,10 @@ dependencies {
     implementation(ApplicationDependencies.okhttp3)
     implementation(ApplicationDependencies.retrofit)
     implementation(ApplicationDependencies.gson)
+
+    //Navigation
+    implementation("androidx.navigation:navigation-fragment-ktx:${VersionApp.navComponentVersion}")
+    implementation("androidx.navigation:navigation-ui-ktx:${VersionApp.navComponentVersion}")
 
     implementation(project(path = ":followers")) {
         //exclude(group = "androidx.core")

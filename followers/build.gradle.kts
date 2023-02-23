@@ -4,6 +4,7 @@ plugins {
     kotlin("android.extensions")
     kotlin("kapt")
     id("kotlin-android")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 kapt {
@@ -40,6 +41,11 @@ android {
         }
     }
 
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
+
     lint {
         disable("ObsoleteLintCustomCheck", "TypographyFractions", "TypographyQuotes")
         isAbortOnError = false
@@ -56,6 +62,12 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+
+    implementation(ApplicationDependencies.lifecycleViewmodel)
+    implementation(ApplicationDependencies.lifecycleRuntime)
+    implementation(ApplicationDependencies.lifecycleLivedata)
 
     // Coroutines
     implementation(ApplicationDependencies.coroutinesCore)
@@ -76,6 +88,14 @@ dependencies {
     implementation(ApplicationDependencies.retrofit)
     implementation(ApplicationDependencies.gson)
     implementation(ApplicationDependencies.okhttp3)
+
+    //epoxy
+    implementation("com.airbnb.android:epoxy:4.1.0")
+    kapt("com.airbnb.android:epoxy-processor:4.1.0")
+
+    //Glide
+    implementation("com.github.bumptech.glide:glide:4.13.2")
+    kapt("com.github.bumptech.glide:compiler:4.13.2")
 
     implementation(MainApplicationDependencies.ugCore)
 

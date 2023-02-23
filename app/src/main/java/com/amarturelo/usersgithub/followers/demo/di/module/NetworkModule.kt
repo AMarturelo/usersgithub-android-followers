@@ -1,7 +1,7 @@
 package com.amarturelo.usersgithub.followers.demo.di.module
 
-import com.amarturelo.usersgithub.core.commons.utils.Constants.API.API_CONNECTION_TIMEOUT
-import com.amarturelo.usersgithub.core.commons.utils.Constants.API.ISO_DATE_FORMAT
+import com.amarturelo.usersgithub.core.commons.Constants.API.API_CONNECTION_TIMEOUT
+import com.amarturelo.usersgithub.core.commons.Constants.API.ISO_DATE_FORMAT
 import com.amarturelo.usersgithub.followers.demo.BuildConfig
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
