@@ -99,7 +99,7 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.13.2")
     kapt("com.github.bumptech.glide:compiler:4.13.2")
 
-    implementation(MainApplicationDependencies.ugCore)
+    implementation(ApplicationModules.ugCore)
 
     tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class).configureEach {
         kotlinOptions {

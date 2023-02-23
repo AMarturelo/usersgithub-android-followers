@@ -92,7 +92,7 @@ dependencies {
     }
 
     //modules
-    implementation(MainApplicationDependencies.ugCore)
+    implementation(ApplicationModules.ugCore)
 
     tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class).configureEach {
         kotlinOptions {
