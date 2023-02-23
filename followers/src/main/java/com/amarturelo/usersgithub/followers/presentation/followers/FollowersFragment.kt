@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 import com.amarturelo.usersgithub.core.exception.Failure
 import com.amarturelo.usersgithub.core.exception.failure
 import com.amarturelo.usersgithub.core.exception.observe
@@ -17,6 +18,8 @@ import com.amarturelo.usersgithub.followers.presentation.followers.vo.FollowerLi
 
 
 class FollowersFragment : BaseFragment<FollowersViewModel>() {
+
+    val args: FollowersFragmentArgs by navArgs()
 
     private lateinit var controller: FollowersController
 
@@ -35,6 +38,7 @@ class FollowersFragment : BaseFragment<FollowersViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        viewModel.initWithUsername(args.username)
         viewModel.populate()
     }
 

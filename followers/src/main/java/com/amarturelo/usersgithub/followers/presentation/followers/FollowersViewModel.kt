@@ -22,6 +22,8 @@ class FollowersViewModel @Inject constructor(
     private val getFollowersByUsernameUseCase: GetFollowersByUsernameUseCase,
 ) : ViewModel() {
 
+    private var username: String? = null
+
     private val _goToDetails: SingleLiveEvent<FollowerListItemVO> = SingleLiveEvent()
     val goToDetails: LiveData<FollowerListItemVO> = _goToDetails
 
@@ -38,10 +40,16 @@ class FollowersViewModel @Inject constructor(
     val contentState: LiveData<String> = _contentState
 
     fun populate() {
+        assert(username != null) { "init viewModel first" }
+
         if (users.value.isNullOrEmpty()) {
             _contentState.value = UsersState.LOADING
         }
-        getFollowersByUsernameUseCase(GetUsersUseCaseParams("amarturelo"), viewModelScope, ::handleGetUsersUseCaseResult)
+        getFollowersByUsernameUseCase(
+            GetUsersUseCaseParams(username!!),
+            viewModelScope,
+            ::handleGetUsersUseCaseResult
+        )
     }
 
     fun refresh() {
@@ -71,6 +79,10 @@ class FollowersViewModel @Inject constructor(
     @VisibleForTesting
     fun setUsers(users: List<FollowerListItemVO>) {
         _users.value = users
+    }
+
+    fun initWithUsername(username: String) {
+        this.username = username
     }
 }
 
