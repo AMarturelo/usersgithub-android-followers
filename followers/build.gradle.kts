@@ -71,18 +71,14 @@ dependencies {
     kapt(ApplicationDependencies.daggerAndroidProcessor)
 
     // test
-    testImplementation(UnitTestingDependencies.truth)
     testImplementation(UnitTestingDependencies.junit)
     testImplementation(UnitTestingDependencies.mockito)
-    testImplementation(UnitTestingDependencies.mockWebServer)
-    testImplementation(UnitTestingDependencies.robolectric)
-    testImplementation(UnitTestingDependencies.robolectricShadow)
-    testImplementation(UnitTestingDependencies.retrofitMock)
-    testImplementation(UnitTestingDependencies.hamcrest)
-    testImplementation(UnitTestingDependencies.assertjAndroid)
-    androidTestImplementation(UnitTestingDependencies.testRunner)
-    testImplementation(UnitTestingDependencies.mockitoKotlin)
-
+    testImplementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2")
+    testImplementation(UnitTestingDependencies.xCoreTesting)
+    testImplementation(UnitTestingDependencies.mockito)
+    androidTestImplementation("androidx.test:runner:1.4.0")
+    testImplementation("io.mockk:mockk:1.12.2")
     implementation(UnitTestingDependencies.junit)
 
     implementation(ApplicationDependencies.retrofit)
