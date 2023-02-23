@@ -16,16 +16,15 @@ import com.amarturelo.usersgithub.followers.domain.usecase.GetUsersUseCaseParams
 import com.amarturelo.usersgithub.followers.presentation.commons.StatefulLayout
 import com.amarturelo.usersgithub.followers.presentation.followers.vo.FollowerListItemVO
 import com.amarturelo.usersgithub.followers.presentation.followers.vo.toVO
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class FollowersViewModel @Inject constructor(
     private val getFollowersByUsernameUseCase: GetFollowersByUsernameUseCase,
 ) : ViewModel() {
 
     private var username: String? = null
-
-    private val _goToDetails: SingleLiveEvent<FollowerListItemVO> = SingleLiveEvent()
-    val goToDetails: LiveData<FollowerListItemVO> = _goToDetails
 
     private val _users: MutableLiveData<List<FollowerListItemVO>> = MutableLiveData()
     val users: LiveData<List<FollowerListItemVO>> = _users

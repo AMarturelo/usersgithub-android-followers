@@ -5,6 +5,7 @@ plugins {
     kotlin("kapt")
     id("kotlin-android")
     id("androidx.navigation.safeargs.kotlin")
+    id("dagger.hilt.android.plugin")
 }
 
 kapt {
@@ -63,12 +64,10 @@ dependencies {
     implementation(ApplicationDependencies.xNavComponentFragmentKtx)
     implementation(ApplicationDependencies.xNavComponentUiKtx)
 
-    // dagger
-    implementation(ApplicationDependencies.dagger)
-    implementation(ApplicationDependencies.daggerAndroid)
-    implementation(ApplicationDependencies.daggerAndroidSupport)
-    kapt(ApplicationDependencies.daggerCompiler)
-    kapt(ApplicationDependencies.daggerAndroidProcessor)
+    // hilt
+    implementation(ApplicationDependencies.hiltAndroid)
+    kapt(ApplicationDependencies.hiltAndroidCompiler)
+    kapt("androidx.hilt:hilt-compiler:1.0.0")
 
     // test
     testImplementation(UnitTestingDependencies.junit)
@@ -126,11 +125,4 @@ android.libraryVariants.forEach { variant ->
     }
 }
 
-val androidSourcesJar by tasks.registering(Jar::class) {
-    archiveClassifier.set("sources")
-    from(android.sourceSets.getByName("main").java.srcDirs)
-}
-
-artifacts {
-    this.archives(androidSourcesJar)
-}
+apply(from = "../publish-module.gradle")

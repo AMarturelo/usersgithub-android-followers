@@ -4,20 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.amarturelo.usersgithub.core.exception.Failure
 import com.amarturelo.usersgithub.core.exception.failure
 import com.amarturelo.usersgithub.core.exception.observe
-import com.amarturelo.usersgithub.core.presentation.BaseFragment
 import com.amarturelo.usersgithub.followers.R
 import com.amarturelo.usersgithub.followers.databinding.FragmentFollowersBinding
 import com.amarturelo.usersgithub.followers.presentation.followers.UsersState.ERROR
 import com.amarturelo.usersgithub.followers.presentation.followers.UsersState.LOADING
 import com.amarturelo.usersgithub.followers.presentation.followers.adapter.FollowersController
 import com.amarturelo.usersgithub.followers.presentation.followers.vo.FollowerListItemVO
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
+class FollowersFragment : Fragment() {
 
-class FollowersFragment : BaseFragment<FollowersViewModel>() {
+    private val viewModel: FollowersViewModel by viewModels()
 
     val args: FollowersFragmentArgs by navArgs()
 

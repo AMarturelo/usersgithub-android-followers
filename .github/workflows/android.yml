@@ -26,4 +26,4 @@ jobs:
       env:
         IS_CICD: $IS_CICD
         BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
-      run: ./gradlew artifactoryPublish
+      run: ./gradlew build

@@ -7,8 +7,11 @@ import com.amarturelo.usersgithub.followers.data.datasource.FollowerDataSource
 import com.amarturelo.usersgithub.followers.data.datasource.remote.FollowerDataSourceRemote
 import com.amarturelo.usersgithub.followers.data.repository.FollowerRepositoryData
 import com.amarturelo.usersgithub.followers.domain.repository.FollowerRepository
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
 @Module
+@InstallIn(SingletonComponent::class)
 class DataModule {
 
     @Provides

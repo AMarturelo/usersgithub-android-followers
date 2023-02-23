@@ -1,15 +1,11 @@
 package com.amarturelo.usersgithub.followers.demo
 
-import com.amarturelo.usersgithub.followers.demo.di.component.DaggerApplicationComponent
-import dagger.android.AndroidInjector
-import dagger.android.DaggerApplication
+import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
-open class App : DaggerApplication() {
-
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication?>? {
-        return DaggerApplicationComponent.factory().create(this)
-    }
+@HiltAndroidApp
+open class App : Application() {
 
     override fun onCreate() {
         super.onCreate()

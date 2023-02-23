@@ -6,6 +6,7 @@ plugins {
     kotlin("android.extensions")
     kotlin("kapt")
     id("androidx.navigation.safeargs.kotlin")
+    id("dagger.hilt.android.plugin")
 }
 apply(from = "buildTypes.gradle")
 
@@ -60,12 +61,9 @@ dependencies {
     implementation(ApplicationDependencies.coroutinesCore)
     implementation(ApplicationDependencies.coroutinesAndroid)
 
-    //dagger
-    implementation(ApplicationDependencies.dagger)
-    implementation(ApplicationDependencies.daggerAndroid)
-    implementation(ApplicationDependencies.daggerSupport)
-    kapt(ApplicationDependencies.daggerCompiler)
-    kapt(ApplicationDependencies.daggerAdroidProcessor)
+    // hilt
+    implementation(ApplicationDependencies.hiltAndroid)
+    kapt(ApplicationDependencies.hiltAndroidCompiler)
 
     //Logger
     implementation(ApplicationDependencies.timber)
