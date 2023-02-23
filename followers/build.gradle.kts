@@ -55,49 +55,62 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.appcompat:appcompat:1.4.1")
-    implementation("com.google.android.material:material:1.5.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.3")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
-    implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    /* Google-Android libraries */
+    implementation(ApplicationDependencies.xAppCompat)
+    implementation(ApplicationDependencies.xDesign)
+    implementation(ApplicationDependencies.xConstraintLayout)
+    implementation(ApplicationDependencies.kotlinStdLib)
+    implementation(ApplicationDependencies.xNavComponentFragmentKtx)
+    implementation(ApplicationDependencies.xNavComponentUiKtx)
 
-    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+    // dagger
+    implementation(ApplicationDependencies.dagger)
+    implementation(ApplicationDependencies.daggerAndroid)
+    implementation(ApplicationDependencies.daggerAndroidSupport)
+    kapt(ApplicationDependencies.daggerCompiler)
+    kapt(ApplicationDependencies.daggerAndroidProcessor)
+
+    // test
+    testImplementation(UnitTestingDependencies.truth)
+    testImplementation(UnitTestingDependencies.junit)
+    testImplementation(UnitTestingDependencies.mockito)
+    testImplementation(UnitTestingDependencies.mockWebServer)
+    testImplementation(UnitTestingDependencies.robolectric)
+    testImplementation(UnitTestingDependencies.robolectricShadow)
+    testImplementation(UnitTestingDependencies.retrofitMock)
+    testImplementation(UnitTestingDependencies.hamcrest)
+    testImplementation(UnitTestingDependencies.assertjAndroid)
+    androidTestImplementation(UnitTestingDependencies.testRunner)
+    testImplementation(UnitTestingDependencies.mockitoKotlin)
+
+    implementation(UnitTestingDependencies.junit)
+
+    implementation(ApplicationDependencies.retrofit)
+    implementation(ApplicationDependencies.retrofitGson)
+    implementation(ApplicationDependencies.okhttp)
+    implementation(ApplicationDependencies.okhttpLoggingInterceptor)
+
+    implementation(ApplicationDependencies.kotlinStdLib)
 
     implementation(ApplicationDependencies.lifecycleViewmodel)
     implementation(ApplicationDependencies.lifecycleRuntime)
     implementation(ApplicationDependencies.lifecycleLivedata)
 
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+
     // Coroutines
     implementation(ApplicationDependencies.coroutinesCore)
     implementation(ApplicationDependencies.coroutinesAndroid)
 
-    //dagger
-    implementation(ApplicationDependencies.dagger)
-    implementation(ApplicationDependencies.daggerAndroid)
-    implementation(ApplicationDependencies.daggerSupport)
-    kapt(ApplicationDependencies.daggerCompiler)
-    kapt(ApplicationDependencies.daggerAdroidProcessor)
-
     //Logger
     implementation(ApplicationDependencies.timber)
 
-    //okHttp
-    implementation(ApplicationDependencies.okhttp3)
-    implementation(ApplicationDependencies.retrofit)
-    implementation(ApplicationDependencies.gson)
-    implementation(ApplicationDependencies.okhttp3)
-
-    //epoxy
-    implementation("com.airbnb.android:epoxy:4.1.0")
-    kapt("com.airbnb.android:epoxy-processor:4.1.0")
+    implementation(ApplicationDependencies.epoxy)
+    kapt(ApplicationDependencies.epoxyProcessor)
 
     //Glide
-    implementation("com.github.bumptech.glide:glide:4.13.2")
-    kapt("com.github.bumptech.glide:compiler:4.13.2")
+    implementation(ApplicationDependencies.glide)
+    kapt(ApplicationDependencies.glideCompiler)
 
     implementation(ApplicationModules.ugCore)
 
