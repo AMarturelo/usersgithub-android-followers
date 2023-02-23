@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.serialization.builtins.main
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -11,16 +13,19 @@ kapt {
 }
 
 android {
-    compileSdk = 33
+    compileSdk = VersionApp.targetSdkVersion
 
     defaultConfig {
         applicationId = "com.amarturelo.usersgithub.followers.demo"
-        minSdk = 24
-        targetSdk = 33
+        minSdk = VersionApp.minSdkVersion
+        targetSdk = VersionApp.targetSdkVersion
         versionCode = 1
         versionName = "1.1"
+
+        testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        renderscriptTargetApi = 21
+        renderscriptSupportModeEnabled = true
     }
 
     compileOptions {
@@ -28,19 +33,20 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    buildFeatures {
-        dataBinding = true
-        viewBinding = true
+    packagingOptions {
+        resources.excludes.add("META-INF/proguard/androidx-annotations.pro")
+        resources.excludes.add("META-INF/androidx.exifinterface_exifinterface.version")
+        resources.pickFirsts.add("lib/armeabi-v7a/libtool-checker.so")
+        resources.pickFirsts.add("lib/arm64-v8a/libtool-checker.so")
+        resources.pickFirsts.add("lib/x86/libtool-checker.so")
+        resources.pickFirsts.add("lib/x86_64/libtool-checker.so")
+        resources.excludes.add("META-INF/*.kotlin_module")
     }
 
-    testOptions {
-        unitTests.isReturnDefaultValues = true
+    dataBinding {
+        this.isEnabled = true
     }
 
-    kotlinOptions {
-        jvmTarget = "1.8"
-        kotlinOptions.freeCompilerArgs += "-Xjvm-default=enable"
-    }
 }
 
 dependencies {
@@ -54,7 +60,32 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 
-    implementation(project(path = ":followers"))
+    // Coroutines
+    implementation(ApplicationDependencies.coroutinesCore)
+    implementation(ApplicationDependencies.coroutinesAndroid)
+
+    //dagger
+    implementation(ApplicationDependencies.dagger)
+    implementation(ApplicationDependencies.daggerAndroid)
+    implementation(ApplicationDependencies.daggerSupport)
+    kapt(ApplicationDependencies.daggerCompiler)
+    kapt(ApplicationDependencies.daggerAdroidProcessor)
+
+    //Logger
+    implementation(ApplicationDependencies.timber)
+
+    //okHttp
+    implementation(ApplicationDependencies.okhttp3LoggingInterceptor)
+    implementation(ApplicationDependencies.okhttp3)
+    implementation(ApplicationDependencies.retrofit)
+    implementation(ApplicationDependencies.gson)
+
+    implementation(project(path = ":followers")) {
+        //exclude(group = "androidx.core")
+    }
+
+    //modules
+    implementation(MainApplicationDependencies.ugCore)
 
     tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class).configureEach {
         kotlinOptions {
