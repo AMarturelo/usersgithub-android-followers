@@ -71,9 +71,35 @@ dependencies {
     //Logger
     implementation(ApplicationDependencies.timber)
 
+    //okHttp
+    implementation(ApplicationDependencies.okhttp3)
+    implementation(ApplicationDependencies.retrofit)
+    implementation(ApplicationDependencies.gson)
+    implementation(ApplicationDependencies.okhttp3)
+
+    implementation(MainApplicationDependencies.ugCore)
+
     tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class).configureEach {
         kotlinOptions {
             freeCompilerArgs.plus("-Xjvm-default=all-compatibility")
         }
     }
+}
+
+android.libraryVariants.forEach { variant ->
+    if (variant.name.contains("debug")) {
+        variant.unitTestVariant?.let {
+            val aptOutputDir = File(buildDir, "generated/source/apt/${it.dirName}")
+            it.addJavaSourceFoldersToModel(aptOutputDir)
+        }
+    }
+}
+
+val androidSourcesJar by tasks.registering(Jar::class) {
+    archiveClassifier.set("sources")
+    from(android.sourceSets.getByName("main").java.srcDirs)
+}
+
+artifacts {
+    this.archives(androidSourcesJar)
 }

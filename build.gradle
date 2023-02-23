@@ -11,14 +11,9 @@ buildscript {
     }
 }
 
-
 allprojects {
     apply plugin: 'com.jfrog.artifactory'
     apply plugin: 'maven-publish'
-    repositories {
-        google()
-        mavenCentral()
-    }
 }
 
 
@@ -72,7 +67,7 @@ project('followers') {
 
 artifactory {
     clientConfig.setIncludeEnvVars(true)
-    clientConfig.info.addEnvironmentProperty('test.adding.dynVar',new Date().toString())
+    clientConfig.info.addEnvironmentProperty('test.adding.dynVar', new Date().toString())
 
     contextUrl = artifactory_context_url
     publish {
@@ -84,7 +79,8 @@ artifactory {
             ivy {
                 ivyLayout = '[organization]/[module]/ivy-[revision].xml'
                 artifactLayout = '[organization]/[module]/[revision]/[module]-[revision](-[classifier]).[ext]'
-                mavenCompatible = true //Convert any dots in an [organization] layout value to path separators, similar to Maven's groupId-to-path conversion. True if not specified
+                mavenCompatible = true
+                //Convert any dots in an [organization] layout value to path separators, similar to Maven's groupId-to-path conversion. True if not specified
             }
         }
         defaults {
@@ -93,7 +89,7 @@ artifactory {
             // published to Artifactory.
             publishArtifacts = true
             // Properties to be attached to the published artifacts.
-            properties = ['qa.level': 'basic', 'dev.team' : 'core']
+            properties = ['qa.level': 'basic', 'dev.team': 'core']
             publishPom = true // Publish generated POM files to Artifactory (true by default)
         }
     }
