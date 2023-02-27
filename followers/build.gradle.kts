@@ -8,6 +8,8 @@ plugins {
     id("dagger.hilt.android.plugin")
 }
 
+apply(from = "jacoco.gradle")
+
 kapt {
     correctErrorTypes = true
 }
@@ -72,12 +74,13 @@ dependencies {
     // test
     testImplementation(UnitTestingDependencies.junit)
     testImplementation(UnitTestingDependencies.mockito)
+    testImplementation(UnitTestingDependencies.mockWebServer)
     testImplementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2")
     testImplementation(UnitTestingDependencies.xCoreTesting)
     testImplementation(UnitTestingDependencies.mockito)
-    androidTestImplementation("androidx.test:runner:1.4.0")
-    testImplementation("io.mockk:mockk:1.12.2")
+    androidTestImplementation(UnitTestingDependencies.testRunner)
+    testImplementation(UnitTestingDependencies.mockk)
     implementation(UnitTestingDependencies.junit)
 
     implementation(ApplicationDependencies.retrofit)

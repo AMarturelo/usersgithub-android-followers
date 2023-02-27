@@ -8,10 +8,10 @@ import com.amarturelo.usersgithub.followers.domain.repository.FollowerRepository
 import javax.inject.Inject
 
 class GetFollowersByUsernameUseCase @Inject constructor(private val repository: FollowerRepository) :
-    UseCase<Either<Failure, List<FollowerEntity>>, GetUsersUseCaseParams>() {
-    override suspend fun run(params: GetUsersUseCaseParams): Either<Failure, List<FollowerEntity>> {
+    UseCase<Either<Failure, List<FollowerEntity>>, GetFollowersByUsernameUseCaseParams>() {
+    override suspend fun run(params: GetFollowersByUsernameUseCaseParams): Either<Failure, List<FollowerEntity>> {
         return repository.followersByUsername(params.username)
     }
 }
 
-data class GetUsersUseCaseParams(val username: String)
+data class GetFollowersByUsernameUseCaseParams(val username: String)

@@ -9,5 +9,6 @@ buildscript {
         classpath(ClasspathDependencies.kotlinGradlePlugin)
         classpath(ClasspathDependencies.navComponentSafeVarargs)
         classpath(ClasspathDependencies.hiltPlugin)
+        classpath(ClasspathDependencies.jacocoPlugin)
     }
 }

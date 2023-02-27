@@ -12,7 +12,7 @@ import com.amarturelo.usersgithub.core.exception.Failure
 import com.amarturelo.usersgithub.core.presentation.SingleLiveEvent
 import com.amarturelo.usersgithub.followers.domain.entity.FollowerEntity
 import com.amarturelo.usersgithub.followers.domain.usecase.GetFollowersByUsernameUseCase
-import com.amarturelo.usersgithub.followers.domain.usecase.GetUsersUseCaseParams
+import com.amarturelo.usersgithub.followers.domain.usecase.GetFollowersByUsernameUseCaseParams
 import com.amarturelo.usersgithub.followers.presentation.commons.StatefulLayout
 import com.amarturelo.usersgithub.followers.presentation.followers.vo.FollowerListItemVO
 import com.amarturelo.usersgithub.followers.presentation.followers.vo.toVO
@@ -45,7 +45,7 @@ class FollowersViewModel @Inject constructor(
             _contentState.value = UsersState.LOADING
         }
         getFollowersByUsernameUseCase(
-            GetUsersUseCaseParams(username!!),
+            GetFollowersByUsernameUseCaseParams(username!!),
             viewModelScope,
             ::handleGetUsersUseCaseResult
         )
