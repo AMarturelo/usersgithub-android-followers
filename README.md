@@ -1,6 +1,13 @@
 # Followers feature
 
 Github Users is an example project on how to set up a multi-repo project
+### Ussing
+
+- MVVM Architecture
+- Hilt
+- Jacoco
+- Navigation
+- Coverage over 90%
 
 ### Related modules
 
