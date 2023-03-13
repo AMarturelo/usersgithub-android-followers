@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.amarturelo.usersgithub.followers.commons.Constants.ARG.USERNAME
+import com.amarturelo.usersgithub.followers.demo.R
 import com.amarturelo.usersgithub.followers.demo.databinding.FragmentDemoBinding
 
 class DemoFragment : Fragment() {
@@ -26,7 +28,10 @@ class DemoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.button.setOnClickListener {
             findNavController().navigate(
-                DemoFragmentDirections.actionDemoFragmentToFollowersFragment("amarturelo")
+                R.id.action_demoFragment_to_followersFragment,
+                Bundle().apply {
+                    putString(USERNAME, "amarturelo")
+                }
             )
         }
     }

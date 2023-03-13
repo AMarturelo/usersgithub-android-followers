@@ -29,6 +29,10 @@ static def releaseRepositoryUrl() {
     return "http://localhost:8081/repository/maven-releases/"
 }
 
+static def snapshotRepositoryUrl() {
+    return "http://localhost:8081/repository/maven-snapshots/"
+}
+
 static def getRepositoryUsername() {
     return "admin"
 }
@@ -71,9 +75,7 @@ project(':followers') {
                     username = getRepositoryUsername()
                     password = getRepositoryPassword()
                 }
-                def releasesRepoUrl = 'http://localhost:8081/repository/maven-releases/'
-                def snapshotsRepoUrl = 'http://localhost:8081/repository/maven-snapshots/'
-                url = libraryVersion.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+                url = libraryVersion.endsWith('SNAPSHOT') ? snapshotRepositoryUrl() : releaseRepositoryUrl()
             }
         }
     }

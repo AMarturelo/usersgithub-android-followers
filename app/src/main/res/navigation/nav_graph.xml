@@ -17,9 +17,5 @@
     <fragment
         android:id="@+id/followersFragment"
         android:name="com.amarturelo.usersgithub.followers.presentation.followers.FollowersFragment"
-        android:label="FollowersFragment" >
-        <argument
-            android:name="username"
-            app:argType="string" />
-    </fragment>
+        android:label="FollowersFragment" />
 </navigation>

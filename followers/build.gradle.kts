@@ -69,14 +69,14 @@ dependencies {
     // hilt
     implementation(ApplicationDependencies.hiltAndroid)
     kapt(ApplicationDependencies.hiltAndroidCompiler)
-    kapt("androidx.hilt:hilt-compiler:1.0.0")
+    kapt(ApplicationDependencies.xHiltCompiler)
 
     // test
     testImplementation(UnitTestingDependencies.junit)
     testImplementation(UnitTestingDependencies.mockito)
     testImplementation(UnitTestingDependencies.mockWebServer)
-    testImplementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2")
+    testImplementation(UnitTestingDependencies.xLifecycleViewmodel)
+    testImplementation(UnitTestingDependencies.coroutinesTestKt)
     testImplementation(UnitTestingDependencies.xCoreTesting)
     testImplementation(UnitTestingDependencies.mockito)
     androidTestImplementation(UnitTestingDependencies.testRunner)
@@ -90,7 +90,7 @@ dependencies {
 
     implementation(ApplicationDependencies.kotlinStdLib)
 
-    implementation(ApplicationDependencies.lifecycleViewmodel)
+    implementation(ApplicationDependencies.xLifecycleViewmodel)
     implementation(ApplicationDependencies.lifecycleRuntime)
     implementation(ApplicationDependencies.lifecycleLivedata)
 
