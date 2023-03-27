@@ -35,6 +35,9 @@ jobs:
 
       - name: Test with Gradle
         uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
+        env:
+          GITHUB_USER: $USER
+          GITHUB_ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         with:
           arguments: followers:test
 
@@ -46,7 +49,4 @@ jobs:
       - name: Publish to GitHub Packages
         uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
         with:
-          arguments: core:publish
-        env:
-          GITHUB_USER: $USER
-          GITHUB_ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          arguments: followers:publish
