@@ -138,9 +138,8 @@ publishing {
             name = "GitHub"
             url = uri("https://maven.pkg.github.com/amarturelo/usersgithub-android-followers")
             credentials {
-                username = (System.getenv("GITHUB_USER") ?: project.properties["GITHUB_USER"]).toString()
-                password = (System.getenv("GITHUB_ACCESS_TOKEN")
-                    ?: project.properties["GITHUB_ACCESS_TOKEN"]).toString()
+                username = System.getenv("GITHUB_USER")
+                password = System.getenv("GITHUB_ACCESS_TOKEN")
             }
         }
     }

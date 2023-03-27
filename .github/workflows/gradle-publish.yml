@@ -22,6 +22,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        env:
+          GITHUB_USER: $USER
+          GITHUB_ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         with:
           submodules: recursive
 
@@ -35,9 +38,6 @@ jobs:
 
       - name: Test with Gradle
         uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
-        env:
-          GITHUB_USER: $USER
-          GITHUB_ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         with:
           arguments: followers:test
 
