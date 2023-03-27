@@ -83,7 +83,7 @@ dependencies {
     }
 
     //modules
-    implementation(ApplicationModules.ugCore)
+    implementation("com.amarturelo.usersgithub:core:1.0.0")
 
     tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class).configureEach {
         kotlinOptions {

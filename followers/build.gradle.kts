@@ -6,7 +6,11 @@ plugins {
     id("kotlin-android")
     id("androidx.navigation.safeargs.kotlin")
     id("dagger.hilt.android.plugin")
+    `maven-publish`
 }
+
+group = ConfigData.groupName
+version = ConfigData.versionName
 
 apply(from = "jacoco.gradle")
 
@@ -110,7 +114,7 @@ dependencies {
     implementation(ApplicationDependencies.glide)
     kapt(ApplicationDependencies.glideCompiler)
 
-    implementation(ApplicationModules.ugCore)
+    implementation("com.amarturelo.usersgithub:core:1.0.0")
 
     tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class).configureEach {
         kotlinOptions {
@@ -128,4 +132,24 @@ android.libraryVariants.forEach { variant ->
     }
 }
 
-apply(from = "../publish-module.gradle")
+publishing {
+    repositories {
+        maven {
+            name = "GitHub"
+            url = uri("https://maven.pkg.github.com/amarturelo/usersgithub-android-followers")
+            credentials {
+                username = (System.getenv("GITHUB_USER") ?: project.properties["GITHUB_USER"]).toString()
+                password = (System.getenv("GITHUB_ACCESS_TOKEN")
+                    ?: project.properties["GITHUB_ACCESS_TOKEN"]).toString()
+            }
+        }
+    }
+    publications {
+        register("followers", MavenPublication::class) {
+            groupId = ConfigData.groupName
+            artifactId = ConfigData.artifactId
+            version = ConfigData.versionName
+            artifact("$buildDir/outputs/aar/${project.name}-release.aar")
+        }
+    }
+}

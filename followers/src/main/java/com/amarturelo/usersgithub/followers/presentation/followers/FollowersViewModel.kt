@@ -47,7 +47,7 @@ class FollowersViewModel @Inject constructor(
         getFollowersByUsernameUseCase(
             GetFollowersByUsernameUseCaseParams(username!!),
             viewModelScope,
-            ::handleGetUsersUseCaseResult
+            ::handleGetUsersUseCaseResult,
         )
     }
 

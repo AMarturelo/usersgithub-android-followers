@@ -4,8 +4,12 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven {
-            isAllowInsecureProtocol = true
-            url = uri("http://localhost:8081/repository/maven-snapshots/")
+            name = "GitHub"
+            url = uri("https://maven.pkg.github.com/amarturelo/usersgithub-android-core")
+            credentials {
+                username = System.getenv("GITHUB_USER")
+                password = System.getenv("GITHUB_ACCESS_TOKEN")
+            }
         }
     }
 }

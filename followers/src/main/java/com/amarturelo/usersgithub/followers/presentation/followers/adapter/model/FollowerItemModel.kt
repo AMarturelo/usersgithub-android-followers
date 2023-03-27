@@ -50,6 +50,5 @@ abstract class FollowerItemModel : EpoxyModelWithHolder<FollowerItemModel.Holder
             tvFullNameUser = itemView.findViewById(R.id.tvFollowerListItemFullName)
             tvPeopleDescription = itemView.findViewById(R.id.tvFollowerListItemDescription)
         }
-
     }
 }

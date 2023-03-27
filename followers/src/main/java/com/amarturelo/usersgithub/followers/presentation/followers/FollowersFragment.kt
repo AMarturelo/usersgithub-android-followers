@@ -23,7 +23,7 @@ class FollowersFragment : Fragment() {
 
     private val viewModel: FollowersViewModel by viewModels()
 
-    //val args: FollowersFragmentArgs by navArgs()
+    // val args: FollowersFragmentArgs by navArgs()
 
     private lateinit var controller: FollowersController
 
@@ -32,8 +32,9 @@ class FollowersFragment : Fragment() {
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentFollowersBinding.inflate(inflater, container, false)
         return binding.root
@@ -79,16 +80,16 @@ class FollowersFragment : Fragment() {
             ERROR,
             LayoutInflater.from(requireContext()).inflate(
                 R.layout.layout_users_state_error,
-                null
-            )
+                null,
+            ),
         )
 
         binding.slFollowers.setStateView(
             LOADING,
             LayoutInflater.from(requireContext()).inflate(
                 R.layout.layout_users_state_loading,
-                null
-            )
+                null,
+            ),
         )
     }
 

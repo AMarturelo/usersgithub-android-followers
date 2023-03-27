@@ -7,6 +7,4 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class FollowerListItemVO(val id: Int, val login: String, val avatarUrl: String) : Parcelable
 
-fun FollowerEntity.toVO(): FollowerListItemVO {
-    return FollowerListItemVO(id, login, avatarUrl)
-}
+fun FollowerEntity.toVO(): FollowerListItemVO = FollowerListItemVO(id, login, avatarUrl)

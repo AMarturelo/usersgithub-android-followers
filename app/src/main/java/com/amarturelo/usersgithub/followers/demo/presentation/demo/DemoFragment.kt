@@ -17,8 +17,9 @@ class DemoFragment : Fragment() {
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentDemoBinding.inflate(inflater, container, false)
         return binding.root
@@ -31,7 +32,7 @@ class DemoFragment : Fragment() {
                 R.id.action_demoFragment_to_followersFragment,
                 Bundle().apply {
                     putString(USERNAME, "amarturelo")
-                }
+                },
             )
         }
     }
@@ -42,6 +43,5 @@ class DemoFragment : Fragment() {
     }
 
     companion object {
-
     }
 }
